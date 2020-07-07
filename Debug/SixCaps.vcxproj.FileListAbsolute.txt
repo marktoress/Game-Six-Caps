@@ -1,0 +1,2 @@
+D:\Training\projects\SixCaps\SixCaps\Debug\SixCaps.exe
+D:\Training\projects\SixCaps\SixCaps\Debug\SixCaps.pdb
