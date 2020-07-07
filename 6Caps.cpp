@@ -30,26 +30,26 @@ class PlayerPC : public Game
 {
 private:
 	int scorePC;
-	int openCapsPC[6] = { 1,2,3,4,5,6 };
-	int closedCapsPC[6] = { 0,0,0,0,0,0 };
+	int openChipsPC[6] = { 1,2,3,4,5,6 };
+	int closedChipsPC[6] = { 0,0,0,0,0,0 };
 public:
 	PlayerPC(string n, int s) : Game(n)
 	{
 		scorePC = s;
 	}
 
-	// получение фишки копма (рандомно от 1-6)
-	int GetCapsPC()
+	// Get ChipsPC (at random from 1 to 6)
+	int GetChipsPC()
 	{
-		for (int i = 0; i < sizeof closedCapsPC/sizeof closedCapsPC[0]; i++)
+		for (int i = 0; i < sizeof closedChipsPC/sizeof closedChipsPC[0]; i++)
 		{
-			if (closedCapsPC[i] == 0)
+			if (closedChipsPC[i] == 0)
 			{
 				bool fl = false;
 				int num = rand() % 6 + 1;
-				for (int j = 0; j < sizeof closedCapsPC / sizeof closedCapsPC[0]; j++)
+				for (int j = 0; j < sizeof closedChipsPC / sizeof closedChipsPC[0]; j++)
 				{
-					if (closedCapsPC[j] == num)
+					if (closedChipsPC[j] == num)
 					{
 						fl = true;
 						i--;
@@ -58,43 +58,43 @@ public:
 				}
 				if (!fl)
 				{
-					closedCapsPC[i] = num;
+					closedChipsPC[i] = num;
 					return num;
 				}
 			}
 		}
 	} 
 
-	void SaveCapsPC(int capsPC)
+	void SaveChipsPC(int chipsPC)
 	{
-		for (int i = 0; i < sizeof openCapsPC / sizeof openCapsPC[0]; i++)
+		for (int i = 0; i < sizeof openChipsPC / sizeof openChipsPC[0]; i++)
 		{
-			if (openCapsPC[i] == capsPC)
+			if (openChipsPC[i] == chipsPC)
 			{
-				openCapsPC[i] = 0;
+				openChipsPC[i] = 0;
 				break;
 			}
-		}
+		}						
 	}
 
 	void ShowInfo(int s) override
 	{
 		Game::ShowInfo(s);
-		cout << "Доступные фишки : ";
-		for (int i = 0; i < sizeof openCapsPC / sizeof openCapsPC[0]; i++)
+		cout << "Open Chips : ";
+		for (int i = 0; i < sizeof openChipsPC / sizeof openChipsPC[0]; i++)
 		{
-			if (openCapsPC[i] != 0)
+			if (openChipsPC[i] != 0)
 			{
-				cout << openCapsPC[i] << " ";
+				cout << openChipsPC[i] << " ";
 			}
 		}
 		cout << endl;
-		cout << "Выпавшие фишки : ";
-		for (int i = 0; i < sizeof closedCapsPC/sizeof closedCapsPC[0]; i++)
+		cout << "Closed Chips : ";
+		for (int i = 0; i < sizeof closedChipsPC/sizeof closedChipsPC[0]; i++)
 		{
-			if (closedCapsPC[i] != 0)
+			if (closedChipsPC[i] != 0)
 			{
-				cout << closedCapsPC[i] << " ";
+				cout << closedChipsPC[i] << " ";
 			}
 		}
 		cout << endl << endl;
@@ -105,41 +105,41 @@ class PlayerUser : public Game
 {
 private:
 	int scoreUser;
-	int openCapsUser[6] = { 1,2,3,4,5,6 };
-	int closedCapsUser[6] = { 0,0,0,0,0,0 };
+	int openChipsUser[6] = { 1,2,3,4,5,6 };
+	int closedChipsUser[6] = { 0,0,0,0,0,0 };
 public:
 	PlayerUser(string n, int s) : Game(n) 
 	{
 		scoreUser = s;
 	}
 
-	void SaveCapsUser(int capsUser)
+	void SaveChipsUser(int chipsUser)
 	{
-		for (int i = 0; i < sizeof openCapsUser/sizeof openCapsUser[0]; i++)
+		for (int i = 0; i < sizeof openChipsUser/sizeof openChipsUser[0]; i++)
 		{
-			if (openCapsUser[i] == capsUser)
+			if (openChipsUser[i] == chipsUser)
 			{
-				openCapsUser[i] = 0;
+				openChipsUser[i] = 0;
 				break;
 			}
 		}
-		for (int i = 0; i < sizeof closedCapsUser / sizeof closedCapsUser[0]; i++)
+		for (int i = 0; i < sizeof closedChipsUser / sizeof closedChipsUser[0]; i++)
 		{
-			if (closedCapsUser[i] == 0)
+			if (closedChipsUser[i] == 0)
 			{
-				closedCapsUser[i] = capsUser;
+				closedChipsUser[i] = chipsUser;
 				break;
 			}
 		}
 	}
 
-	int NoRepeatCapsUser(int capsUser)
+	int NoRepeatChipsUser(int chipsUser)
 	{
-		for (int i = 0; i < sizeof closedCapsUser / sizeof closedCapsUser[0]; i++)
+		for (int i = 0; i < sizeof closedChipsUser / sizeof closedChipsUser[0]; i++)
 		{
-			if (closedCapsUser[i] == capsUser)
+			if (closedChipsUser[i] == chipsUser)
 			{
-				return closedCapsUser[i];
+				return closedChipsUser[i];
 			}
 		}
 		return 0;
@@ -148,21 +148,21 @@ public:
 	void ShowInfo(int s) override
 	{
 		Game::ShowInfo(s);
-		cout << "Доступные фишки : ";
-		for (int i = 0; i < sizeof openCapsUser / sizeof openCapsUser[0]; i++)
+		cout << "Open Chips : ";
+		for (int i = 0; i < sizeof openChipsUser / sizeof openChipsUser[0]; i++)
 		{
-			if (openCapsUser[i] != 0)
+			if (openChipsUser[i] != 0)
 			{
-				cout << openCapsUser[i] << " ";
+				cout << openChipsUser[i] << " ";
 			}
 		}
 		cout << endl;
-		cout << "Выпавшие фишки : ";
-		for (int i = 0; i < sizeof closedCapsUser / sizeof closedCapsUser[0]; i++)
+		cout << "Closed Chips : ";
+		for (int i = 0; i < sizeof closedChipsUser / sizeof closedChipsUser[0]; i++)
 		{
-			if (closedCapsUser[i] != 0)
+			if (closedChipsUser[i] != 0)
 			{
-				cout << closedCapsUser[i] << " ";
+				cout << closedChipsUser[i] << " ";
 			}
 		}
 		cout << endl << endl;
@@ -170,7 +170,7 @@ public:
 };
 
 void CharLine(char ch, int n);
-void ResultScore(int capsPC, int capsUser, int* scorePC, int* scoreUser); //функция подсчета очков
+void ResultScore(int chipsPC, int chipsUser, int* scorePC, int* scoreUser); // function result score
 
 int main()
 {
@@ -180,84 +180,86 @@ int main()
 
 	string name;
 	int count = 1;
-	int capsPC, capsUser, scorePC = 0, scoreUser = 0;
-	int noRepeatCapsUser;
+	int chipsPC, chipsUser, scorePC = 0, scoreUser = 0;
+	int noRepeatChipsUser;
 
-	cout << "\t\t\tПриветствую тебя, Друг!" << endl << endl;
-	cout << "Напиши свое имя " << endl << endl;
+	cout << "\t\t\tHello, My Friend!" << endl << endl;
+	cout << "What's your name ? " << endl << endl;
 	cin >> name;
 
-	PlayerPC playerPC("Комп", scorePC);
+	PlayerPC playerPC("PC", scorePC);
 	PlayerUser playerUser(name, scoreUser);
 
-	cout << "Ок," << name << ", начинаем игру! " << endl;
-	// Цикл жизни игры
+	cout << "Ок," << name << ", Start the Game! " << endl;
+
+	// the life cycle of the game
+
 	while (count <= 6)
 	{
 		CharLine('*', 40);
 
-		cout << "Раунд " << count << endl;
+		cout << "Round " << count << endl;
 
 		CharLine('-', 30);
 
 		playerPC.ShowInfo(scorePC);
 		playerUser.ShowInfo(scoreUser);
 
-		capsPC = playerPC.GetCapsPC();
-		playerPC.SaveCapsPC(capsPC);
+		chipsPC = playerPC.GetChipsPC();
+		playerPC.SaveChipsPC(chipsPC);
 
 		CharLine('-', 30);
 
-		cout << "Выберите фишку 1 - 6 " << endl;
+		cout << "Сhoose a Сhip 1 - 6 " << endl;
 
-		// Проверка на ввод цифр в заданном диапазоне 
+		// Checking for entering digits in the specified range 
 
 		while (true)
 		{
-			cin >> capsUser;
-			noRepeatCapsUser = playerUser.NoRepeatCapsUser(capsUser);
-			if (!cin || capsUser < 1 || capsUser > 6 || capsUser == noRepeatCapsUser )
+			cin >> chipsUser;
+			noRepeatChipsUser = playerUser.NoRepeatChipsUser(chipsUser);
+			if (!cin || chipsUser < 1 || chipsUser > 6 || chipsUser == noRepeatChipsUser )
 			{
 				cin.clear();
 				cin.ignore(numeric_limits<streamsize>::max(), '\n');
-				cout << "Эта фишка уже была или неверный выбор\n Повторите выбор фишки от 1 - 6 " << endl;
+				cout << "This chip was already there or the wrong choice\n Repeat the selection of the chip 1 - 6 " << endl;
 			}
-			else if(capsUser >= 1 && capsUser <= 6)
+			else if(chipsUser >= 1 && chipsUser <= 6)
 			{
 				break;
 			}
 		}
 
-		playerUser.SaveCapsUser(capsUser);
+		playerUser.SaveChipsUser(chipsUser);
 
 		CharLine('*', 40);
 
-		cout << "Фишка компьютера :\t" << capsPC << "\n" <<
-			"Ваша фишка :\t\t" << capsUser << endl;
+		cout << "Chip PC :\t" << chipsPC << "\n" <<
+			"Your Chip :\t" << chipsUser << endl;
 
 		CharLine('*', 40);
 
-		ResultScore(capsPC, capsUser, &scorePC, &scoreUser);
+		ResultScore(chipsPC, chipsUser, &scorePC, &scoreUser);
 		count++;
 	}
 	CharLine('-', 40);
 	playerPC.ShowInfo(scorePC);
 	playerUser.ShowInfo(scoreUser);
-	cout << "\t\t\tИгра окончена!!!" << endl;
+	cout << "\t\t\tGame Over!!!" << endl;
 	if (scorePC > scoreUser)
 	{
-		cout << "Победил компьютер. Очки - " << scorePC <<
-			"\nВаши очки - " << scoreUser << endl;
+		cout << "Won PC. Score- " << scorePC <<
+			"\nYour Score - " << scoreUser << endl;
 	}
 	if (scorePC < scoreUser)
 	{
-		cout << "Вы победили. Очки - " << scoreUser <<
-			"\nОчки компьютера - " << scorePC << endl;
+		cout << "You Won. Score- " << scoreUser <<
+			"\nScore PC - " << scorePC << endl;
 	}
 	if (scorePC == scoreUser)
 	{
-		cout << "Победила Дружба )))\n Очки компьютера - " << scorePC <<
-			"\nВаши очки - " << scoreUser << endl;
+		cout << "Friendship Won )))\n Score PC- " << scorePC <<
+			"\nYour Score - " << scoreUser << endl;
 	}
 
 	_getche();
@@ -271,23 +273,23 @@ void CharLine(char ch, int n)
 	}
 	cout << endl;
 }
-void ResultScore(int capsPC, int capsUser, int* scorePC, int* scoreUser)
+void ResultScore(int chipsPC, int chipsUser, int* scorePC, int* scoreUser)
 {
-	if (capsPC > capsUser)
+	if (chipsPC > chipsUser)
 	{
-		(*scorePC) += capsPC + capsUser;
-		cout << "\tФишка компьютера больше. \n\tВ этом раунде победил комп ! " << endl;
+		(*scorePC) += chipsPC + chipsUser;
+		cout << "\tThe computer chip is bigger. \n\tIn this round, the computer won ! " << endl;
 		return;
 	}
-	if (capsUser > capsPC)
+	if (chipsUser > chipsPC)
 	{
-		(*scoreUser) += capsPC + capsUser;
-		cout << "\tВаша фишка больше. \n\tВ этом раунде победили вы !" << endl;
+		(*scoreUser) += chipsPC + chipsUser;
+		cout << "\tYour chip is bigger. \n\tYou won this round !" << endl;
 		return;
 	}
-	if (capsPC == capsUser)
+	if (chipsPC == chipsUser)
 	{
-		cout << "\tРавные значения фишек!!!\n\tОчки не начисляются!!!" << endl;
+		cout << "\tEqual values of chips!!!\n\tNo points are awarded!!!" << endl;
 		return;
 	}
 }
