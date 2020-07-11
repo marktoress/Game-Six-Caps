@@ -210,7 +210,7 @@ int main()
 
 		CharLine('-', 30);
 
-		cout << "Ñhoose a Ñhip 1 - 6 " << endl;
+		cout << "Choose a chip from 1 to 6 " << endl;
 
 		// Checking for entering digits in the specified range 
 
